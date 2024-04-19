@@ -1,0 +1,56 @@
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <cstdlib>
+#include <cmath>
+#include <queue>
+#include <algorithm>
+#include <string>
+using namespace std;
+using ll = long long;
+
+int lcm(int x, int y) {
+	int res = x * y;
+	while (y > 0) {
+		int tmp = x;
+		x = y;
+		y = tmp % y;
+	}
+	return res / x;
+}
+
+const int mod = 1e9 + 7;
+
+int main() {
+	std::ios::sync_with_stdio(false);
+	cin.tie(nullptr);
+	cout.tie(nullptr);
+	
+	ll n, ans = 0, x = 0, cnt = 0;
+	string s;
+	cin >> n;
+	cin >> s;
+	//vector<ll> f(n + 1);
+	for (int i = 0; i < n; i++) {
+		ll t = s[i] - '0';
+
+		if (t == 0) {
+			ans += x + 1;
+			x = x * 2 % mod;
+		}
+		else if (t & 1) {
+			x = (x * 2 + 1) % mod;
+		}
+		else {
+			ans += x + 1;
+			x = (x * 2 + 1) % mod;
+		}
+	
+	}
+
+
+	cout << ans % mod << endl;
+
+
+	return 0;
+}
